@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="">
+  		<ul class="navbar-nav">
+  			<li class="nav-item" routerLinkActive="active">
+          <a  class="nav-link" routerLink="/home">Home</a></li>
+  			<li class="nav-item" routerLinkActive="active">
+          <a  class="nav-link" [routerLink]="['menu']">Menu</a></li>
+        <li *ngIf="!auth.isLoggedIn()" class="nav-item" routerLinkActive="active">
+          <a  class="nav-link" [routerLink]="['login']">Log in</a></li>
+        <li class="nav-item" routerLinkActive="active">
+          <a  class="nav-link" [routerLink]="['about']">About</a></li>
+        <li class="nav-item" routerLinkActive="active">
+          <a  class="nav-link" [routerLink]="['events']">Events</a></li>
+        <li *ngIf="auth.isLoggedIn()" class="nav-item">
+          <a  class="nav-link" [routerLink]="['home']" (click)="auth.logout()">Logout</a></li>
+        <div *ngIf="auth.isLoggedIn() && auth.userInfo().admin">
+          <li class="nav-item" routerLinkActive="active">
+              <a  class="nav-link" routerLink="inventory">Inventory</a></li>
+          <li class="nav-item" routerLinkActive="active">
+              <a  class="nav-link" routerLink="bartender">Bartender</a></li>
+        </div>
+        <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item"  routerLink="#">Saldo</a>
+              <a class="dropdown-item" routerLink="#">Purchase history</a>
+            </div>
+          </li>
+        </div>
+  		</ul>
+  </div>
+</nav>
+
+

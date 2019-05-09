@@ -1,0 +1,19 @@
+<p>
+  menu!
+</p>
+<div>
+  <ul>
+    <li *ngFor="let prod of prods">
+      {{prod}}
+    </li>
+  </ul>
+
+
+</div>
+<div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
+
+  add to cart
+</div>
+<div *ngIf="!auth.isLoggedIn()">
+Log in to make an order.
+</div>
