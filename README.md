@@ -26,3 +26,18 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 # angular7Restaurant
+
+Deployment is at:
+https://misteriosa.github.io/angular7Restaurant/
+
+Install and deploy github page:
+    Install package:
+    npm i -g angular-cli-ghpages
+
+    Build for production:
+    ng build --prod --base-href="https://misteriosa.github.io/angular7Restaurant/"
+
+    Deploy in github:
+    ngh --dir dist/store
+
+
