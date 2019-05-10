@@ -1,13 +1,21 @@
 <p>
   menu!
 </p>
-<div>
-  <ul>
-    
-  </ul>
+
+  <div class="container">
+    <div *ngFor="let prod of prods" class="d-inline-block card text-white bg-info mb-3" style=" max-width: 10rem;">
+      <img class="card-img-top" [src]="prod.thumb" alt="Card image cap">
+      <div class="card-body" style="overflow: auto; max-height: 7rem;">
+        <h5 class="card-title">{{prod.prod}}</h5>
+        <p class="card-text">{{prod.dept}}.</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">{{prod.price}}</small>
+      </div>
+    </div>   
+  </div>
 
 
-</div>
 <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
 
   add to cart

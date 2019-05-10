@@ -46,7 +46,7 @@ export class AuthenticationService {
    }
 
    getProds(){
-
+    return this.http.get("http://5cd1447bd4a78300147be735.mockapi.io/prods");
    }
 
    getUsers(){

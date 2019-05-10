@@ -7,10 +7,13 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-
+  prods:any;
   constructor(public auth: AuthenticationService) { }
 
   ngOnInit() {
+    this.auth.getProds().subscribe(response => {
+      this.prods = response;
+    });
   }
 
 }
