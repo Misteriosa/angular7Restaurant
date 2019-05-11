@@ -1,7 +1,16 @@
 
 
+  
+ 
   <div class="sticky card border-info mb-3">
-    <div class="card-header text-info">Header</div>
+    <div class="card-header text-info text-center">
+      <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
+        Add to this cart by dragging and dropping an item
+      </div>
+      <div *ngIf="!auth.isLoggedIn()">
+        Log in to make an order.
+      </div>
+    </div> 
     <div droppable (onDrop)="ItemDropInBox($event)" class="card-body text-info">
        <div draggable [dragData]="item" *ngFor="let item of droppedItems" class="d-inline-block card text-white bg-info mb-3" style="width: 10rem;">
           <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
@@ -15,9 +24,11 @@
         </div>  
     </div>
     <div class="card-footer">
+      <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin" class="text-center">
         <button type="button" role="button" class="btn btn-info">Undo</button>
-        <button type="button" role="button" class="btn btn-info">Order</button>
+        <button type="button" role="button" class="btn btn-info">Complete Order</button>
         <button type="button" role="button" class="btn btn-info">Redo</button>
+      </div>
     </div>
   </div>  
 
@@ -35,11 +46,3 @@
     
   </div>
  
-
-<div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
-
-  add to cart
-</div>
-<div *ngIf="!auth.isLoggedIn()">
-Log in to make an order.
-</div>
