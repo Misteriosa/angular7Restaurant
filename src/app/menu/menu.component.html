@@ -1,20 +1,40 @@
-<p>
-  menu!
-</p>
 
-  <div class="container">
-    <div *ngFor="let prod of prods" class="d-inline-block card text-white bg-info mb-3" style=" max-width: 10rem;">
+
+  <div class="sticky card border-info mb-3">
+    <div class="card-header text-info">Header</div>
+    <div droppable (onDrop)="ItemDropInBox($event)" class="card-body text-info">
+       <div draggable [dragData]="item" *ngFor="let item of droppedItems" class="d-inline-block card text-white bg-info mb-3" style="width: 10rem;">
+          <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{item.prod}}</h5>
+            <p class="card-text">{{item.dept}}</p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{item.price}}</small>
+          </div>
+        </div>  
+    </div>
+    <div class="card-footer">
+        <button type="button" role="button" class="btn btn-info">Undo</button>
+        <button type="button" role="button" class="btn btn-info">Order</button>
+        <button type="button" role="button" class="btn btn-info">Redo</button>
+    </div>
+  </div>  
+
+  <div droppable (onDrop)="ItemDropBack($event)" class="container-fluid">
+    <div draggable [dragData]="prod" *ngFor="let prod of prods" class="d-inline-block card text-white bg-info mb-3" style="width: 10rem;">
       <img class="card-img-top" [src]="prod.thumb" alt="Card image cap">
-      <div class="card-body" style="overflow: auto; max-height: 7rem;">
+      <div class="card-body">
         <h5 class="card-title">{{prod.prod}}</h5>
-        <p class="card-text">{{prod.dept}}.</p>
+        <p class="card-text">{{prod.dept}}</p>
       </div>
       <div class="card-footer">
         <small class="text-muted">{{prod.price}}</small>
       </div>
     </div>   
+    
   </div>
-
+ 
 
 <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
 
