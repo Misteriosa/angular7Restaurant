@@ -1,23 +1,62 @@
+
+.wrapper{
+    display: flex;
+  justify-content: space-between;
+}
+.leftPanel{
+width: 60%;
+margin-left: 2%;
+}
 .sticky{
     position: sticky;
     top:0;
-    float: right;
     z-index: 1;
-    width: 30rem;
+    width: 35%;
     height: 100vh;
+ 
 }
-.card-body{
-    overflow: auto; height: 7rem;
+.cardLeft{
+    width: 9rem;
+    margin-left: 1.5rem;
 }
-.card-title{
-    font-size: 14px;
-}
-.card-text{
-    font-size: 12px;
+.cardRight{
+    width: 7rem;
+    margin: 0.3rem;
+
+    .card-title{
+        font-size: 11px;
+    }
+    .card-text{
+        font-size: 9px;
+    }
+    .card-body{
+        height: 3rem;
+    }
 }
 
+.card-body{
+    padding: 2px;
+    overflow: auto; 
+    height: 4rem;
+    text-align: center;
+}
+.card-title{
+    font-size: 13px;
+}
+.card-text{
+    font-size: 11px;
+}
+.card-footer{
+    font-size: 13px;
+    text-align: center;
+    padding: 0;
+    .bt{
+        margin: 0.4em;
+        width: 6rem;
+        height: 4rem;
+    }
+}
 .card{
-    margin-left: 1rem;
     .text-muted{
         text-shadow: 1px 1px 2px white,
         -1px -1px 2px white; 
