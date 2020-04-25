@@ -39,7 +39,7 @@ export class AuthenticationService {
    }
 
    userInfo(){
-     let t=localStorage.getItem("token");
+    let t=localStorage.getItem("token");
     if(t)
       return this.helper.decodeToken(t);
     return false;
