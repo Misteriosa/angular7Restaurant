@@ -1,6 +1,8 @@
-<div class="wrapper">
+<button (click)="undo()">Undo</button>
+<button (click)="redo()">Redo</button>
+<div class="wrapper mt-4">
   <div class="leftPanel" droppable (onDrop)="ItemDropBack($event)">
-    <div draggable [dragData]="prod" *ngFor="let prod of prods" class="d-inline-block card cardLeft text-white bg-info mb-3">
+    <div draggable [dragData]="prod" *ngFor="let prod of prods$ | async" class="d-inline-block card cardLeft text-white bg-info mb-3">
       <img class="card-img-top" [src]="prod.thumb" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{prod.prod}}</h5>
@@ -9,7 +11,7 @@
       <div class="card-footer">
         <small class="text-muted">{{prod.price}}</small>
       </div>
-    </div>   
+    </div>
   </div>
 
   <div class="sticky card border-info mb-3">
@@ -20,9 +22,9 @@
       <div *ngIf="!auth.isLoggedIn()">
         <button class="btn-info btn" routerLink="/login">Log in</button> to make an order.
       </div>
-    </div> 
+    </div>
     <div droppable (onDrop)="ItemDropInBox($event)" class="card-body text-info">
-       <div draggable [dragData]="item" *ngFor="let item of droppedItems" class="d-inline-block card cardRight text-white bg-info mb-3" >
+       <div draggable [dragData]="item" *ngFor="let item of droppedItems$ | async" class="d-inline-block card cardRight text-white bg-info mb-3" >
           <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
           <div class="card-body">
             <h5 class="card-title">{{item.prod}}</h5>
@@ -31,7 +33,7 @@
           <div class="card-footer">
             <small class="text-muted">{{item.price}}</small>
           </div>
-        </div>  
+        </div>
     </div>
     <div class="card-footer">
       <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin" class="text-center">
@@ -40,6 +42,5 @@
         <button type="button" role="button" class="bt btn btn-outline-info">Redo</button>
       </div>
     </div>
-  </div>  
+  </div>
 </div>
- 
