@@ -8,7 +8,7 @@ import * as fromProductState from './store';
   imports: [
     CommonModule,
     StoreModule.forFeature(fromProductState.productStateFeatureKey,
-      fromProductState.reducers, 
+      fromProductState.reducer, 
       { metaReducers: fromProductState.metaReducers })
   ]
 })

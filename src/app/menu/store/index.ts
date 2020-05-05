@@ -68,6 +68,11 @@ export const reducers= createReducer(
     }
   })
 );
+
+export function reducer(state, action) {
+  return reducers(state, action);
+}
+
 export const selectProdsFeature = createFeatureSelector<ProductState>(productStateFeatureKey);
 
 export const selectProds = createSelector(
