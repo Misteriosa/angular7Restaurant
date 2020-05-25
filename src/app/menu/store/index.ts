@@ -1,3 +1,4 @@
+import { undoRedo } from 'ngrx-undo-redo';
 import {
   ActionReducer,
   ActionReducerMap,
@@ -84,4 +85,19 @@ export const selectDropped = createSelector(
   (state: ProductState) => state.droppedItems
 );
 
-export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(
+  {
+        maxBufferSize: 15,
+        allowedActions: [fromActions.loadProductsSuccess, fromActions.dropInBox, fromActions.dropBack]
+  }
+)] : [undoRedo(
+  {
+        maxBufferSize: 15,
+        allowedActions: [fromActions.loadProductsSuccess, fromActions.dropInBox, fromActions.dropBack]
+  }
+)];
+
+
+export function mtaReducers(state, action) {
+  return reducers(state, action);
+}

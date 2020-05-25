@@ -37,13 +37,13 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     FormsModule,
     NgDragDropModule.forRoot(),
-    StoreModule.forRoot(reducers, {
+    StoreModule.forRoot(reducers/*, {
       metaReducers,
       runtimeChecks: {
         strictStateImmutability: true,
         strictActionImmutability: true
       }
-    }),
+    }*/),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
