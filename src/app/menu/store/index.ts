@@ -84,7 +84,7 @@ export const selectDropped = createSelector(
   selectProdsFeature,
   (state: ProductState) => state.droppedItems
 );
-
+/*
 export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(
   {
         maxBufferSize: 15,
@@ -97,7 +97,26 @@ export const metaReducers: MetaReducer<ProductState>[] = !environment.production
   }
 )];
 
+export function getMetaReducers(): MetaReducer<ProductState>[] {
+ return metaReducers;
+}*/
+export const metaReducers: MetaReducer<ProductState> = !environment.production ? undoRedo(
+  {
+        maxBufferSize: 15,
+        allowedActions: [fromActions.loadProductsSuccess, fromActions.dropInBox, fromActions.dropBack]
+  }
+) : undoRedo(
+  {
+        maxBufferSize: 15,
+        allowedActions: [fromActions.loadProductsSuccess, fromActions.dropInBox, fromActions.dropBack]
+  }
+);
 
-export function mtaReducers(state, action) {
-  return reducers(state, action);
+export function getMetaReducers(): MetaReducer<ProductState> {
+ return metaReducers;
 }
+
+
+/*export function mtaReducers(state, action) {
+  return reducers(state, action);
+}*/
