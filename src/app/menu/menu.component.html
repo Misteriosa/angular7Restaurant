@@ -1,4 +1,5 @@
 
+Drag and drop an item!
 <div class="wrapper mt-4">
   <div class="leftPanel" droppable (onDrop)="ItemDropBack($event)">
     <div draggable [dragData]="prod" *ngFor="let prod of prods$ | async" class="d-inline-block card cardLeft text-white bg-info mb-3">
@@ -39,7 +40,7 @@
     </div>
     <div class="card-footer">
       <div class="text-center">
-         Total: {{total$ | async}} 
+         Total: {{total$ | async}}
       </div>
       <div class="text-center">
         <button type="button" role="button" class="bt btn btn-outline-info" (click)="undo()">Undo</button>
