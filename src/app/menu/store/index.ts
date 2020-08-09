@@ -21,12 +21,14 @@ export interface ProductState {
   droppedItems:Product[];
   prods:Product[];
   error:any;
+  total: number;
 }
 
 export const initialState: ProductState = {
   droppedItems:undefined,
   prods:undefined,
-  error:undefined
+  error:undefined,
+  total:0
 };
 
 export const reducers= createReducer(
@@ -34,13 +36,15 @@ export const reducers= createReducer(
   on(fromActions.loadProductsSuccess, (state, action) => {
     return {
       prods: action.products,
-      droppedItems: []
+      droppedItems: [],
+      total: state.total
     }
   }),
   on(fromActions.loadProducts, (state, action) => {
     return {
       prods: state.prods,
-      droppedItems: state.droppedItems
+      droppedItems: state.droppedItems,
+      total: state.total
     }
   }),/*
   on(fromActions.loadProductsFailure, (state, action) => {
@@ -54,18 +58,28 @@ export const reducers= createReducer(
    var pd=  state.prods.filter(({ id }) => id !== action.item.id);
    const di  = Object.assign([], state.droppedItems);
    di.push(action.item);
+   var n:number=+action.item.price;
+   /*console.log('.............n...',n,' state.total ',state.total );
+   console.log('state.total +n',state.total +n);*/
+
     return {
       prods: pd,
-      droppedItems: di
+      droppedItems: di,
+      total: state.total + n
     }
   }),
   on(fromActions.dropBack, (state, action) => {
     var l =  state.droppedItems.filter(({ id }) => id !== action.item.id);//this.removeItem(e.dragData, this.droppedItems)
     const d  = Object.assign([], state.prods); //this.prods.push(e.dragData);
     d.push(action.item);
+    //suma(-action.item.price);//remove price
+    var n:number=+action.item.price;
+    /*console.log('.............n...',n,' state.total ',state.total );
+    console.log('state.total -n',state.total -n);*/
     return {
       prods: d,
-      droppedItems: l
+      droppedItems: l,
+      total: state.total - n
     }
   })
 );
@@ -83,6 +97,10 @@ export const selectProds = createSelector(
 export const selectDropped = createSelector(
   selectProdsFeature,
   (state: ProductState) => state.droppedItems
+);
+export const selectTotal = createSelector(
+  selectProdsFeature,
+  (state: ProductState) => state.total
 );
 /*
 export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(
