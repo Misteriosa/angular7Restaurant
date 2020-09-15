@@ -7,7 +7,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { BartenderComponent } from './bartender/bartender.component';
 import { AuthGuardService } from './auth-guard.service';
 import { AuthGuardClientService } from './auth-guard-client.service';
-import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutComponent } from './menu/checkout/checkout.component';
+import { CurrentOrdersComponent } from './current-orders/current-orders.component';
 
 
 const routes: Routes = [
@@ -17,7 +18,9 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'inventory', component: InventoryComponent, canActivate: [AuthGuardService]},
   {path:'bartender', component: BartenderComponent, canActivate: [AuthGuardService]},
-  {path:'checkout', component: CheckoutComponent}/*,
+  {path:'checkout', component: CheckoutComponent},
+  {path:'currentOrders', component: CurrentOrdersComponent}
+  /*,
 
   {path:'about', component:},
   {path:'events', component:}

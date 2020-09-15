@@ -19,7 +19,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutComponent } from './menu/checkout/checkout.component';
+import { CurrentOrdersComponent } from './current-orders/current-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
     HomeComponent,
     InventoryComponent,
     BartenderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    CurrentOrdersComponent
   ],
   imports: [
     MenuModule,
@@ -46,7 +48,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
         strictActionImmutability: true
       }
     }*/),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]

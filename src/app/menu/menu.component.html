@@ -19,7 +19,16 @@ Drag and drop an item!
     <form #f="ngForm" class="sticky card border-info mb-3" (ngSubmit)="checkout(f.value)">
     <div class="card-header text-info text-center">
       <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
-        Add to this cart by dragging and dropping an item
+        Add to this cart by dragging and dropping an item <br/>
+
+        <div class="text-center text-info">
+           For now the client chooses the table nr, but in a real scenario, they would sit by a table and the device to make the order would provide the table number.
+        </div>
+        <div class="text-center text-info">
+           What table are you sitting?
+           <input required class="" type="number" id="tabl"  name="tabl">
+        </div>
+        
       </div>
       <div *ngIf="!auth.isLoggedIn()">
         <button class="btn-info btn" routerLink="/login">Log in</button> to make an order.

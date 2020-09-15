@@ -95,12 +95,9 @@ export class MenuComponent implements OnInit {
     return  this.total;
   }*/
   checkout(e){ //complete order
+
     this.route.navigate(["checkout"]);
   }
-  hasItems(){
-    var bool=this.total >= 0;
-    console.log(bool);
-    return bool;
-  }
+
 
 }

@@ -81,6 +81,14 @@ export const reducers= createReducer(
       droppedItems: l,
       total: state.total - n
     }
+  }),
+  
+  on(fromActions.resetTotal, (state, action) => {
+    return {
+      prods: state.prods,
+      droppedItems: state.droppedItems,
+      total: 0
+    }
   })
 );
 

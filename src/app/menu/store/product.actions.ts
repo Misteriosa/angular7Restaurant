@@ -24,3 +24,7 @@ export const dropBack = createAction(
   '[MenuComponent] Drop product back',
   props<{  item: any }>()
 );
+
+export const resetTotal = createAction(
+  '[MenuComponent] Reset total price'
+);

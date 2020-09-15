@@ -17,10 +17,16 @@
           <a  class="nav-link" [routerLink]="['login']">Log in</a></li>
 
         <div *ngIf="auth.isLoggedIn() && auth.userInfo().admin">
-          <li class="nav-item" routerLinkActive="active">
-              <a  class="nav-link" routerLink="inventory">Inventory</a></li>
-          <li class="nav-item" routerLinkActive="active">
-              <a  class="nav-link" routerLink="bartender">Bartender</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             {{auth.userInfo().name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a  class="dropdown-item" [routerLink]="['inventory']">Inventory</a>
+              <a  class="dropdown-item" [routerLink]="['bartender']">Current Orders</a>
+              <a  class="dropdown-item" [routerLink]="['home']" (click)="auth.logout()">Logout</a>
+            </div>
+          </li>
         </div>
 
         <div *ngIf="auth.isLoggedIn() && !auth.userInfo().admin">
@@ -32,6 +38,7 @@
               <a class="dropdown-item"  routerLink="#">Saldo</a>
               <a class="dropdown-item" routerLink="#">Purchase history</a>
               <a  class="dropdown-item" [routerLink]="['home']" (click)="auth.logout()">Logout</a>
+              <a  class="dropdown-item" [routerLink]="['currentOrders']" >Current Orders</a>
             </div>
           </li>
         </div>

@@ -14,14 +14,17 @@ export class AuthenticationService {
    }
 
    loginAuth(username: string, password:string){
-     /*if (username === 'a' && password === 'a'){
+     if (username === 'a' && password === 'a'){
        //store the Json web token locally in the browser, dummy jwt created in jwt.io
         localStorage.setItem("token", this.tokenCli);
        return true;
+     }else if (username === 'b' && password === 'b'){
+       localStorage.setItem("token", this.tokenAdmin);
+       return true;
      }else{
-      return false;
-     }*/
-     localStorage.setItem("token", this.tokenCli);
+
+        return false;
+     }
      return true;
    }
 
