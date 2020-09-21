@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import {Observable } from 'rxjs';
 import { ProductState } from '../store';
-import { selectDropped,selectTotal } from "../store";
+import { selectDropped,selectTotal, selectTable } from "../store";
 import { Product } from '../models/product';
 
 
@@ -15,13 +15,14 @@ import { Product } from '../models/product';
 export class CheckoutComponent implements OnInit {
   total$:Observable<number>;
   selectedItems$:Observable<Product[]>;
+  table$:Observable<number>;
 
   constructor(private store: Store<ProductState>,  private route: Router) { }
 
   ngOnInit() {
     this.total$=this.store.pipe(select(selectTotal));
     this.selectedItems$=this.store.pipe(select(selectDropped));
-
+    this.table$=this.store.pipe(select(selectTable));
   }
 
 }

@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
   droppedItems$:Observable<Product[]>;
   total$:Observable<number>;
   total:number;
+  table:number=4;// hardcoded for now
 
   constructor(public auth: AuthenticationService, private store: Store<ProductState>,  private route: Router) { }
 
@@ -37,7 +38,7 @@ export class MenuComponent implements OnInit {
 
     //hardcoded data for github pageXOffset, remove later
     this.prods=[{"id":"1","dept":"Garden","prod":"Incredible Frozen Fish","pic":"http://lorempixel.com/640/480/fashion","price":"20.00","thumb":"https://s3.amazonaws.com/uifaces/faces/twitter/hafeeskhan/128.jpg"},{"id":"2","dept":"Home","prod":"Small Metal Computer","pic":"http://lorempixel.com/640/480/abstract","price":"30.00","thumb":"https://s3.amazonaws.com/uifaces/faces/twitter/mekal/128.jpg"},{"id":"3","dept":"Garden","prod":"Rustic Granite Ball","pic":"http://lorempixel.com/640/480/people","price":"40.00","thumb":"https://s3.amazonaws.com/uifaces/faces/twitter/shanehudson/128.jpg"},{"id":"4","dept":"Garden","prod":"Unbranded Concrete Shirt","pic":"http://lorempixel.com/640/480/transport","price":"10.00","thumb":"https://s3.amazonaws.com/uifaces/faces/twitter/jehnglynn/128.jpg"}];
-    this.store.dispatch(fromActions.loadProductsSuccess({products:this.prods}));
+    this.store.dispatch(fromActions.loadProductsSuccess({products:this.prods, table:this.table}));
     this.prods$=this.store.pipe(select(selectProds));
     this.droppedItems$=this.store.pipe(select(selectDropped));
     this.total$=this.store.pipe(select(selectTotal));

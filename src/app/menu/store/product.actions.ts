@@ -7,7 +7,7 @@ export const loadProducts = createAction(
 
 export const loadProductsSuccess = createAction(
   '[MenuComponent] Load Products Success',
-  props<{ products: Product[] }>()
+  props<{ products: Product[], table: number }>()
 );
 
 export const loadProductsFailure = createAction(

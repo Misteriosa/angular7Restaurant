@@ -22,13 +22,15 @@ export interface ProductState {
   prods:Product[];
   error:any;
   total: number;
+  table: number;
 }
 
 export const initialState: ProductState = {
   droppedItems:undefined,
   prods:undefined,
   error:undefined,
-  total:0
+  total:0,
+  table:0
 };
 
 export const reducers= createReducer(
@@ -37,14 +39,16 @@ export const reducers= createReducer(
     return {
       prods: action.products,
       droppedItems: [],
-      total: state.total
+      total: state.total,
+      table: action.table
     }
   }),
   on(fromActions.loadProducts, (state, action) => {
     return {
       prods: state.prods,
       droppedItems: state.droppedItems,
-      total: state.total
+      total: state.total,
+      table: state.table
     }
   }),/*
   on(fromActions.loadProductsFailure, (state, action) => {
@@ -65,7 +69,8 @@ export const reducers= createReducer(
     return {
       prods: pd,
       droppedItems: di,
-      total: state.total + n
+      total: state.total + n,
+      table: state.table
     }
   }),
   on(fromActions.dropBack, (state, action) => {
@@ -79,15 +84,17 @@ export const reducers= createReducer(
     return {
       prods: d,
       droppedItems: l,
-      total: state.total - n
+      total: state.total - n,
+      table: state.table
     }
   }),
-  
+
   on(fromActions.resetTotal, (state, action) => {
     return {
       prods: state.prods,
       droppedItems: state.droppedItems,
-      total: 0
+      total: 0,
+      table: state.table
     }
   })
 );
@@ -109,6 +116,10 @@ export const selectDropped = createSelector(
 export const selectTotal = createSelector(
   selectProdsFeature,
   (state: ProductState) => state.total
+);
+export const selectTable = createSelector(
+  selectProdsFeature,
+  (state: ProductState) => state.table
 );
 /*
 export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(
