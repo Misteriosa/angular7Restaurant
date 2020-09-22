@@ -22,6 +22,7 @@ import { environment } from '../environments/environment';
 import { CheckoutComponent } from './menu/checkout/checkout.component';
 import { CurrentOrdersComponent } from './current-orders/current-orders.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +50,7 @@ import { CurrentOrdersComponent } from './current-orders/current-orders.componen
       }
     }*/),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+
   ],
   providers: [],
   bootstrap: [AppComponent]

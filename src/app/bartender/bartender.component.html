@@ -1,13 +1,32 @@
+
 <div class="box">
+<!--   <div *ngIf="(table$ | async) == 1; else loading">
+  shdbsbd
+  </div>
+ <ng-template #loading>
+  Loading stuff...
+</ng-template> -->
   <img src="assets\table.gif">
   <div class="chk">
-
+    product 1 -- 20 <br/>
+    product 2 -- 24 <br/>
+    product 3 -- 15 <br/>
+    product 4 -- 50 <br/>
+    product 5 -- 50 <br/>
+    product 6 -- 50 <br/>
+    product 7 -- 50 <br/>
+    product 8 -- 50 <br/>
+    <div *ngIf="(table$ | async) == 1" >
+      <div *ngFor="let item of selectedItems$ | async">
+        {{item.prod}} -- {{item.price}}
+      </div>
+    </div>
   </div>
   <div class="number">
     Nr. 1 <br/>
-    <button type="button" class="orderButton" onclick="" key="serve">Serve selected drinks</button>
-    <button type="button" class="orderButton" onclick="" key="undoServe">Undo order for this Table</button>
-    <button type="button" class="orderButton" onclick="" key="clean">Clean Table</button>
+    <button [disabled]="(table$ | async) != 1" type="button" class="orderButton" onclick="" key="serve">Serve selected drinks</button>
+    <button [disabled]="(table$ | async) != 1" type="button" class="orderButton" onclick="" key="undoServe">Undo order for this Table</button>
+    <button [disabled]="(table$ | async) != 1" type="button" class="orderButton" onclick="" key="clean">Clean Table</button>
   </div>
 </div>
 

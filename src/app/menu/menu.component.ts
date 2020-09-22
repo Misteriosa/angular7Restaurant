@@ -24,7 +24,7 @@ export class MenuComponent implements OnInit {
   droppedItems$:Observable<Product[]>;
   total$:Observable<number>;
   total:number;
-  table:number=4;// hardcoded for now
+  table:number=1;// hardcoded for now
 
   constructor(public auth: AuthenticationService, private store: Store<ProductState>,  private route: Router) { }
 
