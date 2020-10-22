@@ -23,6 +23,8 @@ export interface ProductState {
   error:any;
   total: number;
   table: number;
+  checkedItems:Product[];
+  totalChecked: number;
 }
 
 export const initialState: ProductState = {
@@ -30,7 +32,9 @@ export const initialState: ProductState = {
   prods:undefined,
   error:undefined,
   total:0,
-  table:0
+  table:0,
+  checkedItems:undefined,
+  totalChecked:0,
 };
 
 export const reducers= createReducer(
@@ -38,9 +42,11 @@ export const reducers= createReducer(
   on(fromActions.loadProductsSuccess, (state, action) => {
     return {
       prods: action.products,
-      droppedItems: [],
+      droppedItems: state.droppedItems,
       total: state.total,
-      table: action.table
+      table: action.table,
+      checkedItems: state.checkedItems,
+      totalChecked: state.totalChecked,
     }
   }),
   on(fromActions.loadProducts, (state, action) => {
@@ -48,7 +54,8 @@ export const reducers= createReducer(
       prods: state.prods,
       droppedItems: state.droppedItems,
       total: state.total,
-      table: state.table
+      table: state.table,
+      checkedItems: state.checkedItems
     }
   }),/*
   on(fromActions.loadProductsFailure, (state, action) => {
@@ -65,12 +72,12 @@ export const reducers= createReducer(
    var n:number=+action.item.price;
    /*console.log('.............n...',n,' state.total ',state.total );
    console.log('state.total +n',state.total +n);*/
-
     return {
       prods: pd,
       droppedItems: di,
       total: state.total + n,
-      table: state.table
+      table: state.table,
+      checkedItems: state.checkedItems
     }
   }),
   on(fromActions.dropBack, (state, action) => {
@@ -85,7 +92,8 @@ export const reducers= createReducer(
       prods: d,
       droppedItems: l,
       total: state.total - n,
-      table: state.table
+      table: state.table,
+      checkedItems: state.checkedItems
     }
   }),
 
@@ -93,6 +101,19 @@ export const reducers= createReducer(
     return {
       prods: state.prods,
       droppedItems: state.droppedItems,
+      total: 0,
+      table: state.table,
+      checkedItems: state.checkedItems
+    }
+  }),
+  on(fromActions.checkOutItems, (state, action) => {
+    const d  = Object.assign([], state.checkedItems); //this.prods.push(e.dragData);
+    const its = d.concat(state.droppedItems);
+    return {
+      prods: state.prods,
+      checkedItems: its,
+      droppedItems: [],
+      totalChecked: state.total,
       total: 0,
       table: state.table
     }
@@ -120,6 +141,14 @@ export const selectTotal = createSelector(
 export const selectTable = createSelector(
   selectProdsFeature,
   (state: ProductState) => state.table
+);
+export const selectChecked = createSelector(
+  selectProdsFeature,
+  (state: ProductState) => state.checkedItems
+);
+export const selectTotalChecked = createSelector(
+  selectProdsFeature,
+  (state: ProductState) => state.totalChecked
 );
 /*
 export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(

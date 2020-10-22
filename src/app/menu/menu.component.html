@@ -61,6 +61,7 @@
 </div>
 <div class="wrapper mt-4" *ngIf="auth.userInfo().admin">
   <div class="leftPanel" >
+    Current products being sold. To update the stock go to inventory. <br/><br/>
     <div *ngFor="let prod of prods$ | async" class="d-inline-block card cardLeft text-white bg-info mb-3">
       <img class="card-img-top" [src]="prod.thumb" alt="Card image cap">
       <div class="card-body">

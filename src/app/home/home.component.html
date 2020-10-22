@@ -2,4 +2,4 @@
 <div *ngIf="auth.isLoggedIn()"><h1>Welcome, {{auth.userInfo().name}}.</h1></div>
 <div *ngIf="!auth.isLoggedIn()"><h1>Welcome.</h1></div>
 
-<button class="btn-info btn" routerLink="/menu">Order!</button>
+<button *ngIf="!auth.userInfo().admin" class="btn-info btn" routerLink="/menu">Order!</button>

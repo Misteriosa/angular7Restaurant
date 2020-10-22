@@ -28,3 +28,6 @@ export const dropBack = createAction(
 export const resetTotal = createAction(
   '[MenuComponent] Reset total price'
 );
+export const checkOutItems = createAction(
+  '[MenuComponent] checkout items'
+);

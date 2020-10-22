@@ -96,7 +96,7 @@ export class MenuComponent implements OnInit {
     return  this.total;
   }*/
   checkout(e){ //complete order
-
+    this.store.dispatch(fromActions.checkOutItems());
     this.route.navigate(["checkout"]);
   }
 

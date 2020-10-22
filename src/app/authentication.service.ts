@@ -37,7 +37,7 @@ export class AuthenticationService {
     //return this.helper.isTokenExpired(this.token); // gets from the local storage
     //console.log(this.helper.isTokenExpired(this.token));
     if(localStorage.getItem("token"))
-    return true;
+      return true;
     else return false;
    }
 

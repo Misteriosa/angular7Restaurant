@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgDragDropModule } from 'ng-drag-drop';
 import { MenuModule } from './menu/menu.module';
 
@@ -50,7 +50,7 @@ import { CurrentOrdersComponent } from './current-orders/current-orders.componen
       }
     }*/),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
