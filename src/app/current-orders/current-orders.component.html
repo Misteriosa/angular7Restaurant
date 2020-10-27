@@ -1,8 +1,9 @@
-<p>Your orders:</p>
-
 <div class="text-center text-info">
-   Total: {{total$ | async}} kr
-</div>
+  <h1>Orders waiting to be served:</h1>
+
+
+   Total: {{total$ | async}} kr <br/>
+
 <div *ngFor="let item of selectedItems$ | async" class="d-inline-block card cardRight text-white bg-info mb-3" >
    <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
    <div class="card-body">
@@ -15,9 +16,8 @@
  </div>
 
 <br/>
-<p>Your orders ready to be fetched:</p>
-
-TODO (when bartender clicks 'serve selected orders', they appear here)<br/>
+<h1>Orders ready to be fetched:</h1>
+ (when bartender clicks 'serve selected orders', they appear here)<br/>
 <div *ngFor="let item of servedItems$ | async" class="d-inline-block card cardRight text-white bg-info mb-3" >
    <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
    <div class="card-body">
@@ -28,3 +28,5 @@ TODO (when bartender clicks 'serve selected orders', they appear here)<br/>
      <small class="text-muted">{{item.price}}</small>
    </div>
  </div>
+
+  </div>
