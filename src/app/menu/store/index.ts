@@ -25,6 +25,7 @@ export interface ProductState {
   table: number;
   checkedItems:Product[];
   totalChecked: number;
+  servedItems:Product[];
 }
 
 export const initialState: ProductState = {
@@ -35,6 +36,7 @@ export const initialState: ProductState = {
   table:0,
   checkedItems:undefined,
   totalChecked:0,
+  servedItems: []
 };
 
 export const reducers= createReducer(
@@ -42,20 +44,25 @@ export const reducers= createReducer(
   on(fromActions.loadProductsSuccess, (state, action) => {
     return {
       prods: action.products,
+      error: state.error,
       droppedItems: state.droppedItems,
       total: state.total,
       table: action.table,
       checkedItems: state.checkedItems,
       totalChecked: state.totalChecked,
+      servedItems: state.servedItems
     }
   }),
   on(fromActions.loadProducts, (state, action) => {
     return {
       prods: state.prods,
+      error: state.error,
       droppedItems: state.droppedItems,
       total: state.total,
       table: state.table,
-      checkedItems: state.checkedItems
+      checkedItems: state.checkedItems,
+      totalChecked: state.totalChecked,
+      servedItems: state.servedItems
     }
   }),/*
   on(fromActions.loadProductsFailure, (state, action) => {
@@ -74,10 +81,13 @@ export const reducers= createReducer(
    console.log('state.total +n',state.total +n);*/
     return {
       prods: pd,
+      error: state.error,
       droppedItems: di,
       total: state.total + n,
       table: state.table,
-      checkedItems: state.checkedItems
+      totalChecked: state.totalChecked,
+      checkedItems: state.checkedItems,
+      servedItems: state.servedItems
     }
   }),
   on(fromActions.dropBack, (state, action) => {
@@ -90,32 +100,63 @@ export const reducers= createReducer(
     console.log('state.total -n',state.total -n);*/
     return {
       prods: d,
+      error: state.error,
       droppedItems: l,
       total: state.total - n,
       table: state.table,
-      checkedItems: state.checkedItems
+      checkedItems: state.checkedItems,
+      totalChecked: state.totalChecked,
+      servedItems: state.servedItems
     }
   }),
 
   on(fromActions.resetTotal, (state, action) => {
     return {
       prods: state.prods,
+      error: state.error,
       droppedItems: state.droppedItems,
       total: 0,
       table: state.table,
-      checkedItems: state.checkedItems
+      checkedItems: state.checkedItems,
+      totalChecked: state.totalChecked,
+      servedItems: state.servedItems
     }
   }),
-  on(fromActions.checkOutItems, (state, action) => {
-    const d  = Object.assign([], state.checkedItems); //this.prods.push(e.dragData);
-    const its = d.concat(state.droppedItems);
+  on(fromActions.checkOutItems, (state, action) => {//append previous new checked items to checkedItems
+    const d  = Object.assign([], state.checkedItems);
+    const its = d.concat(state.droppedItems);//cant use .push, because it push the entire array [] and not the items of the array
     return {
       prods: state.prods,
+      error: state.error,
       checkedItems: its,
-      droppedItems: [],
-      totalChecked: state.total,
-      total: 0,
-      table: state.table
+      droppedItems: [], //cleans the cart dropped items
+      totalChecked: state.total, //TODO: add the value to the old
+      total: 0, //zeroes the cart total
+      table: state.table, //hardoced to 1 in loadProductsSuccess in menu.component.ts
+      servedItems: state.servedItems
+    }
+  }),
+  on(fromActions.serveItems, (state, action) => {
+//    var ci=  state.checkedItems.filter(({id}) => !(state.servedItems.some(item => id === item.id)));
+    //get the checkedItems without the served ones
+    function notInServedItems(id: string, state: ProductState){
+      for (var i = 0; i < action.servedItems.length; ++i) {
+        //console.log("id, state.id " + id + " " + state.servedItems[i].id);
+        if (id === action.servedItems[i].id) {
+            return false;
+        }
+      }
+      return true;
+    }
+    return {
+      droppedItems: state.droppedItems,
+      prods: state.prods,
+      error: state.error,
+      total: state.total,
+      table: state.table, //hardoced to 1 in loadProductsSuccess in menu.component.ts
+      checkedItems: state.checkedItems.filter(({id}) => notInServedItems(id, state)), //checkedItems - servedItems
+      totalChecked: state.totalChecked,
+      servedItems: action.servedItems
     }
   })
 );
@@ -149,6 +190,10 @@ export const selectChecked = createSelector(
 export const selectTotalChecked = createSelector(
   selectProdsFeature,
   (state: ProductState) => state.totalChecked
+);
+export const selectServed = createSelector(
+  selectProdsFeature,
+  (state: ProductState) => state.servedItems
 );
 /*
 export const metaReducers: MetaReducer<ProductState>[] = !environment.production ? [undoRedo(

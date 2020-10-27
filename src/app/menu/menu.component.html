@@ -13,8 +13,8 @@
       </div>
     </div>
   </div>
-
-    <form #f="ngForm" class="sticky card border-info mb-3" (ngSubmit)="checkout(f.value)">
+                <!--#f="ngForm"-->                                                      <!--checkout(f.value)-->
+    <form class="sticky card border-info mb-3" (ngSubmit)="checkout()"><!--this form is different from the one in bartender.component, which uses formGroup-->
     <div class="card-header text-info text-center">
       Add to this cart by dragging and dropping an item <br/>
       <div *ngIf="auth.isLoggedIn()">
@@ -51,7 +51,7 @@
          Total: {{total$ | async}} kr
       </div>
       <div class="text-center">
-        <button type="button" role="button" class="bt btn btn-outline-info" (click)="undo()">Undo</button>
+        <button type="button" role="buttotn" class="bt btn btn-outline-info" (click)="undo()">Undo</button>
         <button *ngIf="auth.isLoggedIn() && !auth.userInfo().admin" [disabled]="(total$ | async) <= 0" type="submit" role="button" class="bt btn btn-outline-info">Complete Order</button>
         <button type="button" role="button" class="bt btn btn-outline-info" (click)="redo()">Redo</button>
       </div>

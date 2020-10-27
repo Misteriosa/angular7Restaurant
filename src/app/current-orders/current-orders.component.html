@@ -17,4 +17,14 @@
 <br/>
 <p>Your orders ready to be fetched:</p>
 
-TODO (when bartender clicks 'serve selected orders', they appear here)
+TODO (when bartender clicks 'serve selected orders', they appear here)<br/>
+<div *ngFor="let item of servedItems$ | async" class="d-inline-block card cardRight text-white bg-info mb-3" >
+   <img class="card-img-top" [src]="item.thumb" alt="Card image cap">
+   <div class="card-body">
+     <h5 class="card-title">{{item.prod}}</h5>
+     <p class="card-text">{{item.dept}}</p>
+   </div>
+   <div class="card-footer">
+     <small class="text-muted">{{item.price}}</small>
+   </div>
+ </div>

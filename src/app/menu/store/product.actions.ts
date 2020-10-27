@@ -31,3 +31,7 @@ export const resetTotal = createAction(
 export const checkOutItems = createAction(
   '[MenuComponent] checkout items'
 );
+export const serveItems = createAction(
+  '[bartenderComponent] serve items',
+  props<{ servedItems: Product[] }>()
+);
